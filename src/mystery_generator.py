@@ -1,41 +1,52 @@
 import random
+import json
 
-victims = [
-    "Professor Black",
-    "CEO James Carter",
-    "Dr Emily Stone",
-    "Author Sarah Blake"
-]
+with open("data/victims.json") as f:
+    victims = json.load(f)
 
-locations = [
-    "Mansion",
-    "Museum",
-    "Luxury Hotel",
-    "Train"
-]
+with open("data/locations.json") as f:
+    locations = json.load(f)
 
-methods = [
-    "Poison",
-    "Knife",
-    "Gunshot",
-    "Electrocution"
-]
+with open("data/methods.json") as f:
+    methods = json.load(f)
 
-suspects = [
-    "Assistant",
-    "Business Partner",
-    "Neighbour",
-    "Ex-Spouse",
-    "Son"
-]
+with open("data/suspects.json") as f:
+    suspects = json.load(f)
+
+with open("data/motives.json") as f:
+    motives = json.load(f)
+
+with open("data/clues.json") as f:
+    clues = json.load(f)
 
 victim = random.choice(victims)
 location = random.choice(locations)
 method = random.choice(methods)
-killer = random.choice(suspects)
 
-print("=== MURDER MYSTERY ===")
-print(f"Victim: {victim}")
-print(f"Location: {location}")
-print(f"Method: {method}")
-print(f"Killer: {killer}")
+chosen_suspects = random.sample(suspects, 4)
+
+killer = random.choice(chosen_suspects)
+
+motive = random.choice(motives)
+
+chosen_clues = random.sample(clues, 3)
+
+print("\n=== THE SUSPECT ===\n")
+
+print("Victim:", victim)
+print("Location:", location)
+print("Method:", method)
+
+print("\nSuspects:")
+for suspect in chosen_suspects:
+    print("-", suspect)
+
+print("\nKiller:")
+print("-", killer)
+
+print("\nMotive:")
+print("-", motive)
+
+print("\nClues:")
+for clue in chosen_clues:
+    print("-", clue)
